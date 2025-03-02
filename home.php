@@ -1,7 +1,49 @@
 <?php
+include "./classes/Employee.php";
 
-$birthday = "1989-08-10";
+    $bobby = new Employee(01, "Bobby", 15.0, 0.0, 0.0,0 );
+    //$bobby->
 
-$myDate = DateTime::createFromFormat('Y-m-d', $birthday);
+    $bobby->addWorkedDate("2025-01-01");
+    $bobby->addWorkedDate("2025-02-15");
+    $bobby->addWorkedDate("2025-03-28");
 
-echo $myDate->format('l, F jS, Y');
+    $validationString = "";
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Employee Tracking App</title>
+</head>
+<body>
+ <h1>Add new employee</h1>
+
+    <form action="formHandlers/submitNewEmployee.php" method="POST">
+        <div class="container">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br>
+        </div>
+        <div class="container">
+            <label for="nickname">Nickname:</label>
+            <input type="text" id="nickname" name="nickname"><br>
+        </div>
+        <div class="container">
+            <label for="dailyrate">Daily Rate:</label>
+            <input type="text" id="dailyrate" name="dailyrate"><br>
+        </div>
+        <div class="container">
+            <label for="date">date worked:</label>
+            <input type="date" id="date" name="date"><br>
+        </div>
+        <div class="container">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</body>
+</html>

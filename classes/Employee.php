@@ -8,7 +8,7 @@ class Employee
     private string $nickname;
 
     // The agreed upon daily rate for work.
-    private float $hourlyRate;
+    private float $dailyRate;
 
     // Any money given to employee before payday.
     private float $loanedAmount;
@@ -16,16 +16,14 @@ class Employee
     // Days that haven't been paid yet.
     private float $daysOwed;
 
-    private array $dates_worked = [
-        ['day_number' => 1, 'day_name' => "sunday", 'month_number' => 2, 'month_name' => "january", 'year_number' => 2025],
-        ];
+    private array $dates_worked = [];
 
-    public function __construct($employeeID, $name, $hourlyRate, $daysOwed, $loanedAmount)
+    public function __construct($employeeID, $name, $dailyRate, $daysOwed, $loanedAmount)
     {
         // Employee ID should be created after checking what is the last id within the database table: "Employee"
         $this->employeeID = $employeeID;
         $this->name = $name;
-        $this->hourlyRate = $hourlyRate;
+        $this->dailyRate = $dailyRate;
         $this->daysOwed = $daysOwed;
         $this->loanedAmount = $loanedAmount;
     }
@@ -41,9 +39,13 @@ class Employee
         return $this->name;
     }
 
-    public function getHourlyRate(): float
+    public function getNickname(): string
     {
-        return $this->hourlyRate;
+        return $this->nickname;
+    }
+    public function getdailyRate(): float
+    {
+        return $this->dailyRate;
     }
 
     public function getDaysOwed(): float
@@ -56,6 +58,10 @@ class Employee
         return $this->loanedAmount;
     }
 
+    public function getDatesWorked(): array {
+        return $this->dates_worked;
+    }
+
     // Setters:
     public function setEmployeeID(string $employeeID): void
     {
@@ -65,9 +71,14 @@ class Employee
     {
         $this->name = $name;
     }
-    public function setHourlyRate(float $hourlyRate): void
+
+    public function setNickname(string $nickname): void
     {
-        $this->hourlyRate = $hourlyRate;
+        $this->nickname = $nickname;
+    }
+    public function setdailyRate(float $dailyRate): void
+    {
+        $this->dailyRate = $dailyRate;
     }
     public function setDaysOwed(float $daysOwed): void
     {
@@ -78,8 +89,13 @@ class Employee
         $this->loanedAmount = $loanedAmount;
     }
 
+    public function addWorkedDate(string $date): void
+    {
+        $this->dates_worked[] = $date;
+    }
+
     // Standalone Functions:
     public function calculatePay(): float {
-        return ($this->hourlyRate * $this->daysOwed) - $this->loanedAmount;
+        return ($this->dailyRate * $this->daysOwed) - $this->loanedAmount;
     }
 }
